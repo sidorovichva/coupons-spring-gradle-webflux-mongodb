@@ -10,11 +10,12 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping(PurchaseController.URI)
 @RequiredArgsConstructor
-public class PurchaseController {
+public class PurchaseController implements PurchaseControllerInterface {
     public static final String URI = "/purchase";
 
     private final PurchaseService purchaseService;
 
+    @Override
     @GetMapping(
         path = "/{id}",
         produces = MediaType.APPLICATION_JSON_VALUE
@@ -23,6 +24,7 @@ public class PurchaseController {
         return purchaseService.getPurchase(id);
     }
 
+    @Override
     @PostMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE
@@ -31,6 +33,7 @@ public class PurchaseController {
         return purchaseService.addPurchase(purchase);
     }
 
+    @Override
     @PutMapping(
             path = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE,
